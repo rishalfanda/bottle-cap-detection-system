@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bsort"
+version = "1.0.0"
+description = "Real-time Bottle Cap Color Detection System"
+authors = [{name = "Hafidh Soekma", email = "email@anda.com"}]
+dependencies = [
+    "ultralytics",
+    "opencv-python",
+    "pyyaml",
+    "tqdm"
+]
+requires-python = ">=3.9"
+
+[project.scripts]
+bsort = "bsort.main:main"
+
+# --- TAMBAHKAN BAGIAN INI AGAR ERROR HILANG ---
+[tool.setuptools]
+packages = ["bsort"]

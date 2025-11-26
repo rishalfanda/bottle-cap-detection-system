@@ -1,0 +1,49 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  quality-test-build:
+    runs-on: ubuntu-latest
+    steps:
+      # --- TAHAP 1: PERSIAPAN ---
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Install tools wajib tugas
+          pip install pylint black isort pytest
+          # Install library proyek
+          pip install -r requirements.txt
+          # Install package bsort itu sendiri
+          pip install .
+
+      # --- TAHAP 2: CODE CHECK (Linter & Formatter) ---
+      - name: Check Formatting (Black)
+        # --check artinya hanya memeriksa, tidak mengubah file
+        run: black --check bsort/
+
+      - name: Check Import Sorting (Isort)
+        # --profile black agar tidak bentrok dengan aturan black
+        run: isort --check-only --profile black bsort/
+
+      - name: Lint Code (Pylint)
+        # --fail-under=7.0: Pipeline akan gagal jika nilai kerapian kode < 7.0
+        # disable=C0111: Mengabaikan missing docstring di beberapa tempat agar tidak terlalu strict
+        run: pylint bsort/ --fail-under=7.0 --disable=C0111
+
+      # --- TAHAP 3: UNIT TEST ---
+      - name: Run Unit Tests (Pytest)
+        run: pytest tests/
+
+      # --- TAHAP 4: DOCKER BUILD ---
+      - name: Build Docker Image
+        # Memastikan Dockerfile bisa di-build tanpa error
+        run: docker build -t bsort:latest .

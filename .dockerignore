@@ -1,0 +1,22 @@
+# .dockerignore
+
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.git/
+.gitignore
+.github/
+
+# Abaikan folder hasil training agar image ringan
+runs/
+bsort_runs/
+dataset/
+raw_data/
+
+# Abaikan file model besar (kecuali yang best.pt yang mau dipakai)
+*.zip
