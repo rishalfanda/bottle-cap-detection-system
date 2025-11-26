@@ -87,16 +87,29 @@ Note: Reducing input resolution to 320x320 reduces computational load by ~75%, a
 1. Due to the limited size of the training dataset, the model currently operates best with a lower confidence threshold (0.25).
 2. Future improvements will involve collecting more diverse data to improve High-Confidence Precision.
 
-## Project Structure
+## 📂 Project Structure
 
-bsort/
-├── bsort/           # Core Source Code
-│   ├── main.py      # CLI Entry Point
-│   ├── infer.py     # Inference Engine
-│   └── ...
-├── config/          # Configuration Files
-├── tests/           # Unit Tests
-├── Dockerfile       # Container Setup
-└── pyproject.toml   # Project Metadata
+The project follows a modular Python package structure, designed for scalability and ease of deployment.
+
+```text
+bsort_project/
+├── .github/
+│   └── workflows/
+│       └── ci_cd.yaml       # GitHub Actions pipeline (Lint, Test, Build)
+├── bsort/                   # Core Source Code Package
+│   ├── __init__.py          # Package initialization
+│   ├── main.py              # CLI Entry Point (handles 'train' and 'infer' commands)
+│   ├── infer.py             # Inference Engine (YOLOv8 wrapper & logic)
+│   └── utils.py             # Helper functions (HSV logic, preprocessing)
+├── config/
+│   └── settings.yaml        # Centralized configuration (thresholds, model paths)
+├── tests/                   # Unit Tests
+│   └── test_basic.py        # Pytest cases for config and imports
+├── .dockerignore            # Specifies files to exclude from Docker builds
+├── .gitignore               # Specifies files to ignore in Git (datasets, models)
+├── Dockerfile               # Docker configuration for containerized deployment
+├── pyproject.toml           # Project metadata, dependencies, and CLI script definitions
+├── README.md                # Project documentation and usage guide
+└── requirements.txt         # List of Python dependencies
 
 Created by Risha Alfanda
