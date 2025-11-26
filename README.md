@@ -46,6 +46,8 @@ Hardware Constraints
 1. Target Device: Raspberry Pi 5 (Edge)
 2. Constraint: Inference time < 10ms
 
+### Optimization Strategy
+
 <table border="1" cellspacing="0" cellpadding="6">
     <tr>
         <th>Metric</th>
@@ -75,10 +77,8 @@ Hardware Constraints
 </table>
 
 
-### Optimization Strategy
-Since a physical Raspberry Pi was unavailable, performance was benchmarked on a local CPU using Resolution Scaling to simulate edge constraints.
-MetricValue (Local CPU)Estimated RasPi 5 (NCNN)Input Size320x320320x320FormatPyTorch (.pt)NCNN (.ncnn)Inference Time~12.5 ms~5-8 msFPS~80 FPS>100 FPS
-Note: Reducing input resolution to 320x320 reduces computational load by ~75%, allowing the model to meet the <10ms target on ARM CPUs.
+
+
 
 ### Detection Results
 (Sample output showing dark_blue class detection with confidence scores)
