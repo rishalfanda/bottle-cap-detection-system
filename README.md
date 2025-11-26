@@ -46,6 +46,35 @@ Hardware Constraints
 1. Target Device: Raspberry Pi 5 (Edge)
 2. Constraint: Inference time < 10ms
 
+<table border="1" cellspacing="0" cellpadding="6">
+    <tr>
+        <th>Metric</th>
+        <th>Value (Local CPU)</th>
+        <th>Estimated RasPi 5 (NCNN)</th>
+    </tr>
+    <tr>
+        <td><b>Input Size</b></td>
+        <td>320x320</td>
+        <td>320x320</td>
+    </tr>
+    <tr>
+        <td><b>Format</b></td>
+        <td>PyTorch (.pt)</td>
+        <td>NCNN (.ncnn)</td>
+    </tr>
+    <tr>
+        <td><b>Inference Time</b></td>
+        <td>~12.5 ms</td>
+        <td>~5–8 ms</td>
+    </tr>
+    <tr>
+        <td><b>FPS</b></td>
+        <td>~80 FPS</td>
+        <td>>100 FPS</td>
+    </tr>
+</table>
+
+
 ### Optimization Strategy
 Since a physical Raspberry Pi was unavailable, performance was benchmarked on a local CPU using Resolution Scaling to simulate edge constraints.
 MetricValue (Local CPU)Estimated RasPi 5 (NCNN)Input Size320x320320x320FormatPyTorch (.pt)NCNN (.ncnn)Inference Time~12.5 ms~5-8 msFPS~80 FPS>100 FPS
